@@ -11,14 +11,14 @@
 
 python3Packages.buildPythonApplication {
   pname = "chirp";
-  version = "0.4.0-unstable-2024-11-11";
+  version = "0.4.0-unstable-2025-01-12";
   pyproject = true;
 
   src = fetchFromGitHub {
     owner = "kk7ds";
     repo = "chirp";
-    rev = "71812ad1214fcd1555375aeddfc5ddaf2079918b";
-    hash = "sha256-cDDv3GECxoJu0LT8mYeStFL4DeQKS638ZoweI8HbvaI=";
+    rev = "fc94f14823f3257961c4d0e144083fe6f397ad55";
+    hash = "sha256-J1Hhz6M1VhfIttz9lJnPNQsOJbzKBrb6Yz154oh3moo=";
   };
 
   nativeBuildInputs = [
@@ -39,6 +39,7 @@ python3Packages.buildPythonApplication {
     requests
     yattag
     suds
+    lark
     wxpython
   ];
 

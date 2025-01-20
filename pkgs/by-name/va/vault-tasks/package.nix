@@ -2,19 +2,25 @@
   lib,
   fetchFromGitHub,
   rustPlatform,
+  nix-update-script,
 }:
-rustPlatform.buildRustPackage rec {
+let
+  version = "0.8.1";
+in
+rustPlatform.buildRustPackage {
   pname = "vault-tasks";
-  version = "0.4.0";
+  inherit version;
   src = fetchFromGitHub {
     owner = "louis-thevenet";
     repo = "vault-tasks";
     rev = "v${version}";
-    hash = "sha256-owpdBkJwSTLtRhPdQMybZpfrZyww1zwFIydFdZb76Uo=";
+    hash = "sha256-4sg1v541NknaOClZAkYC6tGlpItBT6RzUK9Itniu7OQ=";
   };
-  cargoHash = "sha256-7AZItl459Gsqd6I5MNhJm6cH7Oze3wCsejJGztPSICw=";
+  cargoHash = "sha256-7MSe2YpVV68nXXeMPy+AGO0hYPpsOaR2S82c/EBczwQ=";
 
   postInstall = "install -Dm444 desktop/vault-tasks.desktop -t $out/share/applications";
+
+  passthru.updateScript = nix-update-script { };
 
   meta = {
     description = "TUI Markdown Task Manager";

@@ -44,7 +44,7 @@
   e2fsprogs,
   krb5,
   libdrm,
-  mesa,
+  libgbm,
   unzip,
   copyDesktopItems,
   libxshmfence,
@@ -57,24 +57,24 @@
 
 let
   pname = "gitkraken";
-  version = "10.4.1";
+  version = "10.6.1";
 
   throwSystem = throw "Unsupported system: ${stdenv.hostPlatform.system}";
 
   srcs = {
     x86_64-linux = fetchzip {
       url = "https://release.axocdn.com/linux/GitKraken-v${version}.tar.gz";
-      hash = "sha256-ZvLDGhBnWjjWqzwqJOz91X8hr94jkXtMA8CL2hh9mlI=";
+      hash = "sha256-OzVBimAi9vAi6YhSRV0a51MWSmdHmHvvXbimeaNFpBU=";
     };
 
     x86_64-darwin = fetchzip {
       url = "https://release.axocdn.com/darwin/GitKraken-v${version}.zip";
-      hash = "sha256-fPvEItavxFwUbk3WsTBvzRMu7fjnm5HxybEueHn//Q4=";
+      hash = "sha256-MF6H3tNUw4P4BAzScMsolyB9Qage/7aZwe84gCBjyV4=";
     };
 
     aarch64-darwin = fetchzip {
       url = "https://release.axocdn.com/darwin-arm64/GitKraken-v${version}.zip";
-      hash = "sha256-N8WMbJFC74tIeJ6Yyk58nT+sIBYN/7PNLdYNxGSB2yM=";
+      hash = "sha256-Akn8LSSYEj/dUU8iNWm5wO239wKGBmQp9RfzbCjI5Wo=";
     };
   };
 
@@ -91,6 +91,7 @@ let
       evanjs
       arkivm
       nicolas-goudry
+      Rishik-Y
     ];
     mainProgram = "gitkraken";
   };
@@ -145,7 +146,7 @@ let
       e2fsprogs
       krb5
       libdrm
-      mesa
+      libgbm
       libxshmfence
       libxkbcommon
       libGL
@@ -191,7 +192,7 @@ let
     '';
 
     preFixup = ''
-      gappsWrapperArgs+=(--add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations}}")
+      gappsWrapperArgs+=(--add-flags "\''${NIXOS_OZONE_WL:+\''${WAYLAND_DISPLAY:+--ozone-platform-hint=auto --enable-features=WaylandWindowDecorations --enable-wayland-ime=true}}")
     '';
 
     postFixup = ''
